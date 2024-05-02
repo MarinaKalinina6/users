@@ -118,7 +118,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/main', name: 'main')]
+    #[Route('/', name: 'main')]
     public function main(Security $security, EntityManagerInterface $entityManager): Response
     {
         $currentUsername = $security->getUser();
