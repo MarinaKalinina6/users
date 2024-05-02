@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row mt-4 mb-5">
+            <h1>Sign up</h1>
+        </div>
+        <div class="row">
+            <form action="{{ path('signup') }}" method="post">
+                {{ form(form, {attr: {novalidate: 'novalidate'}}) }}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            </form>
+        </div>
+        <div>Already have an account? <a href="{{ path('signin') }}">Sing in</a></div>
+
+
+    </div>
+
+
+
+{% endblock %}
+
+

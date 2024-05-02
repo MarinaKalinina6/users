@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div data-controller="user">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <nav class="navbar navbar-light bg-light">
+                    <span class="navbar-brand">Users</span>
+                </nav>
+                <div>
+                    <a href="#" data-action="user#block" class="btn btn-sm btn-outline-secondary">Block</a>
+                    <a href="#" data-action="user#unblock" class="btn btn-sm btn-outline-secondary">Unblock</a>
+                    <a href="#" data-action="user#delete" class="btn btn-sm btn-outline-secondary">Delete</a>
+                </div>
+                <div class="form-inline my-lg-2 my-lg-0">
+                    {{ currentUsername }}
+                    <a style="color: #000000" href="{{ path('_logout_main') }}"> Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="form-inline my-lg-2 my-lg-0">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="myCheckbox"
+                                   data-user-target="toggle"
+                                   data-action="click->user#toggleAll">
+                        </th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Registered</th>
+                        <th scope="col">Authorized</th>
+                        <th scope="col">Status</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in data %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" value="user"
+                                       data-user-target="checkbox"
+                                       data-id="{{ row.id }}">
+                            </td>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.username }}</td>
+                            <td>{{ row.email }}</td>
+                            <td>{{ row.addedAt|date('d-m-Y H:i') }}</td>
+                            <td>{{ row.lastSignInAt ? row.lastSignInAt|date('d-m-Y H:i') : 'never' }}</td>
+                            <td>{{ row.isActive ? 'Active' : 'Blocked' }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
